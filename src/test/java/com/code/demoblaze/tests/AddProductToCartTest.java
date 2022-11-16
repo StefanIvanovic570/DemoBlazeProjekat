@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 public class AddProductToCartTest extends TestMethods {
     @Test
-    public void addToCart() throws InterruptedException {
+    public void addToCart() {
         mainPage.openMainPage();
         mainPage.getBtnCart().click();
         Assert.assertTrue(cartPage.checkIfCartIsEmpty());
