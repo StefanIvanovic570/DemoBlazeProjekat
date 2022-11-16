@@ -58,16 +58,9 @@ public class MainPage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[text()='Log out']")));
     }
 
-    public void waitBtnPrevious() {
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Previous']")));
+    public void waitProductElement(String productName) {
+        wait.until(ExpectedConditions.elementToBeClickable((By.xpath("//a[text()='" + productName + "']"))));
     }
-    public void waitProduct(String productName){
-        wait.until(ExpectedConditions.elementToBeClickable(getProductByName(productName)));
-    }
-    public void waitBtnNext(){
-        wait.until(ExpectedConditions.elementToBeClickable(By.id("next2")));
-    }
-
     //Other Methods
 
     public void openMainPage() {
@@ -86,6 +79,10 @@ public class MainPage extends BasePage {
 
     public boolean elementIsVisible(String productName) {
         try {
+            waitProductElement(productName);
+        } catch (org.openqa.selenium.TimeoutException ignore) {
+        }
+        try {
             getProductByName(productName).isDisplayed();
             return true;
         } catch (org.openqa.selenium.NoSuchElementException e) {
@@ -94,13 +91,9 @@ public class MainPage extends BasePage {
     }
 
     public void clickOnProductByName(String productName) {
-
         while (!elementIsVisible(productName)) {
-            waitBtnNext();
             getBtnNextProductPage().click();
-            waitBtnPrevious();
         }
-        waitProduct(productName);
         getProductByName(productName).click();
     }
 }

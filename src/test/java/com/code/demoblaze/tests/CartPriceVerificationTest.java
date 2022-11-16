@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 public class CartPriceVerificationTest extends TestMethods {
     @Test
-    public void verifyCartTotalPrice() {
+    public void verifyCartTotalPrice() throws InterruptedException {
         mainPage.openMainPage();
 
         addProductByName("Nexus 6");
