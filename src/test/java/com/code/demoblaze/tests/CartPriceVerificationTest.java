@@ -9,8 +9,8 @@ public class CartPriceVerificationTest extends TestMethods {
     public void verifyCartTotalPrice() {
         mainPage.openMainPage();
 
-        addProduct("Nexus 6");
-        addProduct("Dell i7 8gb");
+        addProductByName("Nexus 6");
+        addProductByName("Dell i7 8gb");
 
         mainPage.getBtnCart().click();
         cartPage.waitCartContents();
