@@ -61,6 +61,12 @@ public class MainPage extends BasePage {
     public void waitBtnPrevious() {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Previous']")));
     }
+    public void waitProduct(String productName){
+        wait.until(ExpectedConditions.elementToBeClickable(getProductByName(productName)));
+    }
+    public void waitBtnNext(){
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Next']")));
+    }
 
     //Other Methods
 
@@ -78,7 +84,7 @@ public class MainPage extends BasePage {
     }
 
 
-    public boolean isElementVisible(String productName) {
+    public boolean elementIsVisible(String productName) {
         try {
             getProductByName(productName).isDisplayed();
             return true;
@@ -88,10 +94,13 @@ public class MainPage extends BasePage {
     }
 
     public void clickOnProductByName(String productName) {
-        while (!isElementVisible(productName)) {
+
+        while (!elementIsVisible(productName)) {
+            waitBtnNext();
             getBtnNextProductPage().click();
             waitBtnPrevious();
         }
+        waitProduct(productName);
         getProductByName(productName).click();
     }
 }
