@@ -4,7 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 
-public class CartPriceVerificationTest extends BaseTest {
+public class CartPriceVerificationTest extends TestMethods {
     @Test
     public void verifyCartTotalPrice() {
         mainPage.openMainPage();
@@ -18,11 +18,5 @@ public class CartPriceVerificationTest extends BaseTest {
         Assert.assertEquals(cartPage.sumOfPricesV2(), Integer.parseInt(cartPage.getTotalPriceElement().getText()));
     }
 
-    public void addProduct(String productName) {
-        mainPage.getBtnHome().click();
-        mainPage.clickOnProductByName(productName);
-        productPage.waitBtnAddToCart();
-        productPage.getBtnAddToCart().click();
-        productPage.handleAlert();
-    }
+
 }

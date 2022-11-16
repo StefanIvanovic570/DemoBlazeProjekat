@@ -4,7 +4,7 @@ package com.code.demoblaze.tests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class AddProductToCartTest extends BaseTest {
+public class AddProductToCartTest extends TestMethods {
     @Test
     public void addToCart() {
         mainPage.openMainPage();
@@ -18,13 +18,5 @@ public class AddProductToCartTest extends BaseTest {
         cartPage.waitCartContents();
         cartPage.checkIfCartIsEmpty();
         Assert.assertFalse(cartPage.getCartIsEmpty());
-    }
-
-    public void addProduct(String productName) {
-        mainPage.getBtnHome().click();
-        mainPage.clickOnProductByName(productName);
-        productPage.waitBtnAddToCart();
-        productPage.getBtnAddToCart().click();
-        productPage.handleAlert();
     }
 }
