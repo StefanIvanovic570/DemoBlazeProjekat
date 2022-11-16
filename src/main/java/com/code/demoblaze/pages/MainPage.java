@@ -65,7 +65,7 @@ public class MainPage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(getProductByName(productName)));
     }
     public void waitBtnNext(){
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Next']")));
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("next2")));
     }
 
     //Other Methods
