@@ -1,26 +1,30 @@
 package com.code.demoblaze.tests;
 
-import com.code.demoblaze.pages.CartPage;
-import com.code.demoblaze.pages.MainPage;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class AddProductToCartTest extends BaseTest {
     @Test
-    public void addToCart() throws InterruptedException {
-        CartPage cartPage = new CartPage(driver);
-        MainPage mainPage = new MainPage(driver);
-
+    public void addToCart() {
         mainPage.openMainPage();
-        cartPage.openCartPage();
+        mainPage.getBtnCart().click();
         Assert.assertTrue(cartPage.checkIfCartIsEmpty());
 
-        mainPage.openMainPage();
-        mainPage.addItemToCartByName("Nexus 6");
+        addProduct("Nexus 6");
+        addProduct("Dell i7 8gb");
 
-        cartPage.openCartPage();
+        mainPage.getBtnCart().click();
         cartPage.waitCartContents();
         cartPage.checkIfCartIsEmpty();
         Assert.assertFalse(cartPage.getCartIsEmpty());
+    }
+
+    public void addProduct(String productName) {
+        mainPage.getBtnHome().click();
+        mainPage.clickOnProductByName(productName);
+        productPage.waitBtnAddToCart();
+        productPage.getBtnAddToCart().click();
+        productPage.handleAlert();
     }
 }

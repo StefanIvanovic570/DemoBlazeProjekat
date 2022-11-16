@@ -1,6 +1,5 @@
 package com.code.demoblaze.tests;
 
-import com.code.demoblaze.pages.MainPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -8,8 +7,7 @@ import org.testng.annotations.Test;
 public class LoginTest extends BaseTest {
 
     @Test
-    public void verifyLogIn() throws InterruptedException {
-        MainPage mainPage = new MainPage(driver);
+    public void verifyLogIn() {
         mainPage.openMainPage();
 
         mainPage.getBtnLogIn().click();
@@ -19,7 +17,7 @@ public class LoginTest extends BaseTest {
         mainPage.inputPassword("test");
         mainPage.getBtnLogInWithCredentials().click();
 
-        mainPage.waitForLoading(2000);
+        mainPage.waitBtnLogOut();
         Assert.assertTrue(mainPage.getBtnLogOut().isDisplayed());
     }
 }

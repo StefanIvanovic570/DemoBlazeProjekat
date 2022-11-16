@@ -7,17 +7,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.ArrayList;
 import java.util.List;
 
-public class CartPage {
+public class CartPage extends BasePage {
 
     private boolean cartIsEmpty = false;
-    private WebDriver driver;
-
 
     public CartPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     public boolean getCartIsEmpty() {
@@ -26,19 +23,6 @@ public class CartPage {
 
     public void setCartIsEmpty(boolean cartIsEmpty) {
         this.cartIsEmpty = cartIsEmpty;
-    }
-
-    public WebDriver getDriver() {
-        return driver;
-    }
-
-    public void setDriver(WebDriver driver) {
-        this.driver = driver;
-    }
-
-    public void openCartPage() {
-        this.driver.get("https://www.demoblaze.com/cart.html");
-        this.driver.manage().window().maximize();
     }
 
     public WebElement getTotalPriceElement() {
@@ -64,7 +48,7 @@ public class CartPage {
 
     public void waitCartContents() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(2000));
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td")));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[text()='Delete']")));
     }
 
     public boolean checkIfCartIsEmpty() {
@@ -74,28 +58,6 @@ public class CartPage {
             cartIsEmpty = true;
         }
         return cartIsEmpty;
-    }
-
-    public int sumOfPrices() {
-        int toReturn = 0;
-        int counter = 0;
-        List<Integer> toRemove = new ArrayList<>();
-        for (int i = 0; i < getListOfBoughtItemsTable().size(); i++) {
-            if (counter != 2) {
-                toRemove.add(i);
-                counter++;
-            } else {
-                counter = 0;
-            }
-        }
-        for (int i = 0; i < toRemove.size(); i++) {
-            getListOfBoughtItemsTable().remove(toRemove.get(i));
-        }
-
-        for (int i = 0; i < getListOfBoughtItemsTable().size(); i++) {
-            toReturn = toReturn + Integer.parseInt(getListOfBoughtItemsTable().get(i).getText());
-        }
-        return toReturn;
     }
 
     public int sumOfPricesV2() {
