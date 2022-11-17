@@ -10,7 +10,7 @@ public class CartPriceVerificationTest extends TestMethods {
         mainPage.openMainPage();
 
         addProductByName("Nexus 6");
-        addProductByName("Dell i7 8gb");
+        addProductByName("ASUS Full HD");
 
         mainPage.getBtnCart().click();
         cartPage.waitCartContents();
